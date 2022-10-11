@@ -129,11 +129,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\Service1\\Service1.csproj",
+      "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\Service1\\Service1.csproj",
       "projectName": "Service1",
-      "projectPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\Service1\\Service1.csproj",
+      "projectPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\Service1\\Service1.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\Service1\\obj\\",
+      "outputPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\Service1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -153,8 +153,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj"
+            "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj"
             }
           }
         }

@@ -7,4 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Service1
-build_property.ProjectDir = C:\Users\Lenovo\source\repos\MQTTClient\IntersServiceCommunication\Service1\
+build_property.ProjectDir = C:\Users\Lenovo\source\repos\MQTTClient\GenericCommunication\IntersServiceCommunication\Service1\

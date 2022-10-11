@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CCifaOc43vn3nDqBHT3GjeddDr92p53aotzZqADsIPi8eLnLPGxsFshbfjHDvvisDf8t8RKssrOjAiPyJxfqfw==",
+  "dgSpecHash": "rJq8zKGeAWcjKbqpX+Sw2DNtExEfxgwrtnMcGmpq51f0SRFE6ZpJf6uOLaImKHm57rWbBS+7MGEghRPLD/3iZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\source\\repos\\MQTTClient\\GenericCommunication\\IntersServiceCommunication\\MQTTClient\\MQTTClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\mqttnet\\4.1.1.318\\mqttnet.4.1.1.318.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"

@@ -23,7 +23,8 @@ namespace MQTTClient
         public MQTTMessageDTO(string topic, JObject? payload)
         {
             Topic = topic;
-            Payload = (payload != null)? (JObject)payload?.DeepClone(): null;
+            var jObjectPayload = (payload != null)? (JObject)payload: null;
+            Payload = jObjectPayload != null?  JObject.FromObject(jObjectPayload) : null;
         }
 
         public override string ToString()

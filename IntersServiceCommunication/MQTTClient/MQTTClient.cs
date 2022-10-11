@@ -3,6 +3,7 @@ using MQTTnet;
 using MQTTnet.Client;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace MQTTClient
     public sealed class MQTTClient : IMQTTCommunication
     {
         private IMqttClient? _mqttClient;
+        private readonly string _defaultTopic = "default";
 
         public MQTTClient (MqttClientOptions clientOptions)
         {
@@ -18,6 +20,11 @@ namespace MQTTClient
             _mqttClient = factory.CreateMqttClient();
             var connectionTask = _mqttClient.ConnectAsync(clientOptions, CancellationToken.None);
             connectionTask.Wait();
+        }
+
+        public MQTTClient(IMqttClient? mqttClient)
+        {
+            _mqttClient = mqttClient;
         }
 
         public async Task Disconnect(CancellationToken cancellationToken)
@@ -39,50 +46,79 @@ namespace MQTTClient
         {
             if(_mqttClient != null)
             {
-                if (_mqttClient.IsConnected)
-                {
-                    Disconnect(CancellationToken.None).Wait();
-                }
-
+                Disconnect(CancellationToken.None).Wait();
                 _mqttClient.Dispose();
                 _mqttClient = null;
             }
         }
 
-        public Task ReciveMessage<T>(T eventArgs, CancellationToken cancellationToken) 
-            where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task SendMessage<T>(T message, IEnumerable<string> ackClientIds, CancellationToken cancellationToken) 
-            where T: class
+        public async Task SendMessage<T>(T message, IEnumerable<string> ackClientIds, CancellationToken cancellationToken)
+        where T : class
         {
             if(_mqttClient != null)
             {
                 if (_mqttClient.IsConnected)
                 {
-                    var messageBuilder = new MqttApplicationMessageBuilder();
-                    MQTTMessageDTO? messageDTO = message as MQTTMessageDTO;
-                    if(messageDTO != null)
+                    if(message != null)
                     {
-                        MqttApplicationMessage payload = messageBuilder.WithPayload(messageDTO.Payload.ToString())
-                        .WithTopic(messageDTO.Topic)
-                        .Build();
-                        await _mqttClient.PublishAsync(null, cancellationToken);
+                        var messageBuilder = new MqttApplicationMessageBuilder();
+                        MqttApplicationMessage payload;
+
+                        if (message is MQTTMessageDTO)
+                        {
+                            var mqttMessageDTO = message as MQTTMessageDTO;
+                            if(mqttMessageDTO is null)
+                            {
+                                throw new InvalidCastException("Cannot cast message into MQTTMessageDTO.");
+                            }
+
+                            payload = messageBuilder
+                                .WithPayload(mqttMessageDTO.Payload?.ToString())
+                                .WithTopic(mqttMessageDTO.Topic)
+                                .Build();
+                        }
+                        else
+                        {
+                            payload = messageBuilder.WithPayload(message?.ToString())
+                                .WithTopic(_defaultTopic)
+                                .Build();
+                        }
+                        
+                        
+                        await _mqttClient.PublishAsync(payload, cancellationToken);
                     }
                 }
             }
         }
 
-        public Task Subscribe(string topic, CancellationToken cancelationToken)
+        public async Task Subscribe(string topic, CancellationToken cancelationToken)
         {
-            throw new NotImplementedException();
+            if (_mqttClient != null)
+            {
+                if (_mqttClient.IsConnected)
+                {
+                    var subscriptionOptions = new MqttClientSubscribeOptionsBuilder()
+                        .WithTopicFilter(new MqttTopicFilterBuilder().WithTopic(topic).Build())
+                        .Build();
+
+                    await _mqttClient.SubscribeAsync(subscriptionOptions, cancelationToken);
+                }
+            }
         }
 
-        public Task Unsubscribe(string topic, CancellationToken cancelationToken)
+        public async Task Unsubscribe(string topic, CancellationToken cancelationToken)
         {
-            throw new NotImplementedException();
+            if (_mqttClient != null)
+            {
+                if (_mqttClient.IsConnected)
+                {
+                    var unsubscriptionOptions = new MqttClientUnsubscribeOptionsBuilder()
+                        .WithTopicFilter(topic)
+                        .Build();
+
+                    await _mqttClient.UnsubscribeAsync(unsubscriptionOptions, cancelationToken);
+                }
+            }
         }
     }
 }
