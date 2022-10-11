@@ -19,7 +19,16 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
+    - name: Build .NET application
+      working-directory: IntersServiceCommunication
       run: dotnet build --no-restore --configuration Release -warnAsErrors
-    - name: Test
+      
+  testing:
+    needs: build
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Testing .NET application
+      working-directory: IntersServiceCommunication
       run: dotnet test --no-build --verbosity normal --configuration Release
