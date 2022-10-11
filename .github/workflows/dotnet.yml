@@ -20,12 +20,12 @@ jobs:
       working-directory: IntersServiceCommunication
       run: dotnet build --no-restore --configuration Release -warnaserror -graph
       
-  testing:
-    needs: build
+  #testing:
+  #  needs: build
     
-    runs-on: ubuntu-latest
+  #  runs-on: ubuntu-latest
     
-    steps:
-    - name: Testing .NET application
-      working-directory: IntersServiceCommunication
-      run: dotnet test --no-build --verbosity normal --configuration Release
+  #  steps:
+  #  - name: Testing .NET application
+  #    working-directory: IntersServiceCommunication
+  #    run: dotnet test --no-build --verbosity normal --configuration Release
