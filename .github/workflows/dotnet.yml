@@ -18,7 +18,7 @@ jobs:
       run: dotnet restore
     - name: Build .NET application
       working-directory: IntersServiceCommunication
-      run: dotnet build --no-restore --configuration Release -warnAsErrors
+      run: dotnet build --no-restore --configuration Release -warnaserror -graph
       
   testing:
     needs: build
